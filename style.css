@@ -1,34 +1,170 @@
+/* Cabina: an old photo booth in terracotta-tile red, cream and gold. System fonts only, so
+   the site loads nothing from anyone else. */
 :root {
-  --bg: #fbfbfa;
-  --fg: #1d1d1f;
-  --muted: #5f6368;
-  --accent: #2a5db0;
-  --card: #ffffff;
-  --line: #e3e3e0;
+  --bg: #b8503f;
+  --bg-deep: #a5463a;
+  --cream: #fdf3e1;
+  --cream-soft: rgba(253, 243, 225, 0.86);
+  --ink: #1f1714;
+  --gold: #f0c46a;
+  --frame: #1f1714;
+  --hole: #b8503f;
+  --ticket: #fdf3e1;
+  --ticket-ink: #1f1714;
+  --ticket-muted: #6b5a50;
+  --face-bg: #efe4cf;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #141416;
-    --fg: #ececee;
-    --muted: #a2a2a8;
-    --accent: #7aa7f0;
-    --card: #1d1d20;
-    --line: #2e2e33;
+    --bg: #2a1714;
+    --bg-deep: #22120f;
+    --cream: #f6e8d2;
+    --cream-soft: rgba(246, 232, 210, 0.8);
+    --gold: #e9b453;
+    --frame: #120b09;
+    --hole: #2a1714;
+    --ticket: #3a2420;
+    --ticket-ink: #f6e8d2;
+    --ticket-muted: #c9b39f;
+    --face-bg: #e9dcc4;
   }
 }
+
 * { box-sizing: border-box; }
+html { background: var(--bg); }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: var(--cream);
+  background: radial-gradient(1100px 700px at 80% -10%, rgba(255, 255, 255, 0.07), transparent 70%), var(--bg);
+  font: 17px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
 }
-main { max-width: 680px; margin: 0 auto; padding: 32px 16px 64px; }
-header { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-h1 { font-size: 30px; line-height: 1.2; margin: 8px 0 4px; }
-h2 { font-size: 20px; margin: 32px 0 8px; }
-p, li { color: var(--fg); }
-.lead { color: var(--muted); font-size: 18px; margin-top: 0; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px 20px; }
-a { color: var(--accent); }
-footer { margin-top: 48px; color: var(--muted); font-size: 14px; }
+a { color: var(--gold); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+img { max-width: 100%; display: block; }
+figure { margin: 0; }
+
+.top, main, .foot { max-width: 1100px; margin: 0 auto; padding-left: 22px; padding-right: 22px; }
+.top { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font: 700 13px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; }
+.brand { color: var(--cream); text-decoration: none; }
+.brand span { margin-left: 8px; color: var(--gold); }
+.brand span::before { content: "★ "; }
+.lang { color: var(--cream-soft); text-decoration: none; }
+
+main { padding-bottom: 32px; }
+main.narrow { max-width: 760px; padding-top: 28px; }
+section { margin: 72px 0; }
+h1, h2 { font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; text-transform: uppercase; text-wrap: balance; }
+h1 { font-size: clamp(42px, 6.6vw, 80px); margin: 18px 0 18px; }
+h2 { font-size: clamp(28px, 3.4vw, 38px); margin: 0 0 24px; }
+h3 { font-size: 19px; margin: 0 0 6px; }
+.lead { font-size: 20px; color: var(--cream-soft); max-width: 31em; margin: 0 0 22px; }
+.muted { color: var(--cream-soft); font-size: 15px; }
+
+/* The booth's lit sign. */
+.eyebrow {
+  display: inline-block; margin: 0; border: 3px solid var(--gold); color: var(--gold); padding: 7px 14px;
+  border-radius: 6px; font: 800 13px/1 var(--mono); letter-spacing: 0.25em; text-transform: uppercase;
+  box-shadow: 0 0 14px rgba(240, 196, 106, 0.3), inset 0 0 10px rgba(240, 196, 106, 0.15);
+}
+
+.hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: center; margin-top: 40px; }
+.price { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.coin {
+  flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--gold); color: var(--ink);
+  display: grid; place-items: center; font: 900 15px/1 var(--sans); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22);
+}
+.promises { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font: 700 14px/1.4 var(--mono); }
+.promises li + li::before { content: "· "; color: var(--gold); }
+.soon {
+  display: inline-block; margin: 26px 0 0; padding: 12px 20px; border-radius: 12px; background: var(--cream); color: var(--ink);
+  font: 700 14px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+/* The strip that drops out of the booth. */
+.strip {
+  justify-self: center; width: 250px; background: var(--cream); padding: 16px 16px 54px; display: grid; gap: 12px;
+  transform: rotate(3deg); box-shadow: 0 26px 44px -20px rgba(0, 0, 0, 0.55);
+}
+.face { width: 100%; height: auto; display: block; background: var(--face-bg); }
+.face .ink { fill: #1f1714; }
+.face .paper { fill: #fff8ea; }
+.face .ink-line { fill: none; stroke: #1f1714; stroke-linecap: round; stroke-linejoin: round; }
+.face .paper.ink-line { fill: #fff8ea; }
+.face .paper-line { fill: none; stroke: #fff8ea; stroke-linecap: round; }
+.face .accent { fill: #b8503f; }
+.face .blush { fill: #b8503f; opacity: 0.18; }
+.face .band-warm, .face .band-cool { display: none; }
+
+.cutline { border-top: 2px dashed var(--cream-soft); margin: 64px 0; position: relative; }
+.cutline span { position: absolute; left: 24px; top: -0.9em; background: var(--bg); padding: 0 10px; font: 700 14px/1.6 var(--mono); color: var(--cream-soft); }
+
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.step .num {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--ink);
+  font: 900 18px/1 var(--sans); margin-bottom: 14px; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+}
+.step h3 { text-transform: uppercase; letter-spacing: 0.02em; }
+.step p { margin: 0; color: var(--cream-soft); }
+
+/* Screenshots as frames of film, sprocket holes on both sides. */
+.shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+.film { position: relative; background: var(--frame); padding: 14px 16px 0; border-radius: 6px; }
+.film::before, .film::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 9px;
+  background: repeating-linear-gradient(var(--frame) 0 9px, var(--hole) 9px 17px);
+}
+.film::before { left: 3px; }
+.film::after { right: 3px; }
+.film img { border-radius: 18px; width: 100%; height: auto; }
+.shot figcaption { font: 700 12px/1.4 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); padding: 14px 4px 0; text-align: center; }
+
+/* Formats and printing as booth tickets. */
+.formats, .cards, .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.format, .card {
+  background: var(--ticket); color: var(--ticket-ink); border-radius: 10px; padding: 24px 26px; position: relative;
+  -webkit-mask: radial-gradient(10px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(10px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+  mask: radial-gradient(10px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(10px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+}
+.format .size { font: 900 44px/1 var(--sans); letter-spacing: -0.03em; margin: 0 0 10px; color: var(--hole); }
+@media (prefers-color-scheme: dark) { .format .size { color: var(--gold); } }
+.format p, .card p { margin: 0; color: var(--ticket-muted); }
+.card h3 { color: var(--ticket-ink); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 10px; }
+.card em { color: var(--ticket-ink); font-style: normal; font-weight: 700; }
+.cut { /* crop marks from the previous theme are not used here */ }
+
+.note { border-left: 5px solid var(--gold); padding: 6px 0 6px 26px; }
+.note p { margin: 0; max-width: 46em; color: var(--cream-soft); }
+.pair p { margin: 0; color: var(--cream-soft); }
+
+.intro { margin-top: 64px; }
+.intro p { max-width: 40em; color: var(--cream-soft); }
+.app-card { display: grid; grid-template-columns: 130px 1fr; gap: 26px; align-items: center; }
+.app-card .app-icon { background: var(--cream); padding: 10px 10px 26px; transform: rotate(-3deg); box-shadow: 0 16px 28px -16px rgba(0, 0, 0, 0.5); }
+.app-card h2 { font-size: 28px; margin-bottom: 8px; }
+.app-card h2 a { color: var(--cream); text-decoration: none; }
+.app-card p { margin: 0 0 6px; color: var(--cream-soft); }
+
+.back { font: 700 14px/1 var(--mono); }
+.plain { padding-left: 1.1em; }
+.plain li { margin-bottom: 12px; color: var(--cream-soft); }
+
+.foot {
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 2px dashed var(--cream-soft);
+  padding-top: 20px; padding-bottom: 44px; margin-top: 40px; font: 700 13px/1.4 var(--mono); letter-spacing: 0.08em; color: var(--cream-soft);
+}
+
+@media (max-width: 860px) {
+  .shots { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 60%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
+  .shot { scroll-snap-align: start; }
+}
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  section { margin: 52px 0; }
+  .hero { grid-template-columns: 1fr; gap: 36px; margin-top: 24px; }
+  .strip { width: 200px; order: -1; }
+  .steps, .formats, .cards, .pair { grid-template-columns: 1fr; gap: 22px; }
+  .app-card { grid-template-columns: 96px 1fr; gap: 18px; }
+}
