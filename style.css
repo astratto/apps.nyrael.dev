@@ -137,6 +137,8 @@ h3 { font-size: 19px; margin: 0 0 6px; }
 
 .note { border-left: 5px solid var(--gold); padding: 6px 0 6px 26px; }
 .note p { margin: 0; max-width: 46em; color: var(--cream-soft); }
+.tip { margin: 28px 0 0; max-width: 46em; color: var(--cream-soft); }
+.tip strong { color: var(--cream); }
 .pair p { margin: 0; color: var(--cream-soft); }
 
 .intro { margin-top: 64px; }
