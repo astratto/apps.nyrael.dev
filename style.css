@@ -172,3 +172,10 @@ h3 { font-size: 19px; margin: 0 0 6px; }
   .steps, .formats, .cards, .pair { grid-template-columns: 1fr; gap: 22px; }
   .app-card { grid-template-columns: 96px 1fr; gap: 18px; }
 }
+
+/* Novedades: one section per version, with whether it is out yet. */
+.release { margin: 40px 0; }
+.release h2 { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+.status { padding: 6px 12px; border-radius: 999px; font: 800 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.status.live { background: var(--gold); color: var(--ink); }
+.status.pending { border: 2px dashed var(--cream-soft); color: var(--cream); }
